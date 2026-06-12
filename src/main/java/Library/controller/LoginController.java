@@ -28,10 +28,6 @@ public class LoginController implements ActionListener {
         this.daoMembre   = new DAOMembre(new File("membres.dat"));
         this.daoDocument = new DAODocument(new File("documents.dat"));
 
-        if (auth.getRole("admin") == null) {
-            auth.saveAdminUser("admin", "admin");
-        }
-
         if (daoDocument.getList().isEmpty()) {
             chargerDonneesDemo();
         }
@@ -90,7 +86,7 @@ public class LoginController implements ActionListener {
                 return;
             }
 
-            boolean ok = auth.saveUser(login, password, "membre");
+            boolean ok = auth.saveUser(login, password);
             if (ok) {
                 JOptionPane.showMessageDialog((JFrame) view,
                         "Compte créé ! Vous pouvez vous connecter.",
@@ -103,13 +99,6 @@ public class LoginController implements ActionListener {
         if ("CANCEL".equals(cmd) || "QUITTER".equals(cmd)) {
             System.exit(0);
         }
-    }
-
-    private void ouvrirEspaceMembre(Membre membre) {
-        MembreFrame membreFrame = new MembreFrame();
-        ControllerMembre ctrl   = new ControllerMembre(
-                membreFrame, membre, daoDocument, daoMembre);
-        ctrl.run();
     }
 
     private void chargerDonneesDemo() {

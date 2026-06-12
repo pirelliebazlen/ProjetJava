@@ -5,7 +5,6 @@ import java.io.FileOutputStream;
 import java.util.Properties;
 
 public class PropertiesAuthenticator extends Authenticator {
-
     private final String path;
 
     public PropertiesAuthenticator() {
@@ -36,16 +35,38 @@ public class PropertiesAuthenticator extends Authenticator {
         return parts.length >= 2 ? parts[1] : null;
     }
 
-    public boolean saveUser(String login, String password, String role) {
+    private boolean adminExists() {
         Properties props = load();
-        if (props.containsKey(login)) return false;
-        props.setProperty(login, password + ";" + role);
-        return sauvegarder(props);
+        for (Object value : props.values()) {
+            String[] parts = value.toString().split(";");
+            if (parts.length >= 2 && "admin".equals(parts[1])) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    public boolean saveAdminUser(String login, String password) {
+    public boolean saveUser(String login, String password) {
         Properties props = load();
-        props.setProperty(login, password + ";admin");
+        if (props.containsKey(login)) return false;
+
+        String role;
+        if(login.equals("Admin"))
+        {
+            boolean verif= adminExists();
+            if(verif==true)
+            {
+                return false;
+            }
+            else {
+                role="admin";
+            }
+        }
+        else {
+            role = "membre";
+        }
+
+        props.setProperty(login, password + ";" + role);
         return sauvegarder(props);
     }
 
