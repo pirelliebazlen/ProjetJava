@@ -24,13 +24,9 @@ public class LoginController implements ActionListener {
 
     public LoginController(ViewLogin view) {
         this.view        = view;
-        this.auth        = new PropertiesAuthenticator();
+        this.auth        = new PropertiesAuthenticator("src/main/resources/users.properties");
         this.daoMembre   = new DAOMembre(new File("membres.dat"));
         this.daoDocument = new DAODocument(new File("documents.dat"));
-
-        if (daoDocument.getList().isEmpty()) {
-            chargerDonneesDemo();
-        }
 
         this.view.setController(this);
     }
@@ -101,20 +97,5 @@ public class LoginController implements ActionListener {
         }
     }
 
-    private void chargerDonneesDemo() {
-        daoDocument.add(new Library.model.entity.Livre(
-                "Le Petit Prince", 1943, LocalDate.of(1943, 4, 6),
-                "Antoine de Saint-Exupéry", 96));
-        daoDocument.add(new Library.model.entity.Livre(
-                "Clean Code", 2008, LocalDate.of(2008, 8, 1),
-                "Robert C. Martin", 431));
-        daoDocument.add(new Library.model.entity.DVD(
-                "Inception", 2010, LocalDate.of(2010, 7, 16), 148));
-        daoDocument.add(new Library.model.entity.DVD(
-                "Interstellar", 2014, LocalDate.of(2014, 11, 5), 169));
-        daoDocument.add(new Library.model.entity.Magazine(
-                "National Geographic", 2024, LocalDate.of(2024, 3, 1), 42));
-        daoDocument.add(new Library.model.entity.Magazine(
-                "Science & Vie", 2024, LocalDate.of(2024, 1, 1), 101));
-    }
+
 }

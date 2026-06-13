@@ -32,7 +32,7 @@ public class LoginFrame extends JFrame implements ViewLogin {
 
         mainPanel = new JPanel();
         mainPanel.setLayout(new GridLayout(3, 2, 10, 10));
-        mainPanel.setBackground(new Color(255, 255, 255, 220));
+        mainPanel.setBackground(new Color(255, 255, 255, 255));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
 

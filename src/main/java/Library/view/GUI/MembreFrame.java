@@ -129,7 +129,7 @@ public class MembreFrame extends JFrame implements ViewMembre {
 
     @Override
     public void afficherNomMembre(String nom) {
-        lblNomMembre.setText("Membre" + nom);
+        lblNomMembre.setText("Membre " + nom);
     }
 
     @Override
@@ -173,6 +173,7 @@ public class MembreFrame extends JFrame implements ViewMembre {
 
     public int getSelectedDocumentEmprunteId() {
         int row = tableEmpruntes.getSelectedRow();
+
         if (row == -1) return -1;
         return (int) modelEmpruntes.getValueAt(row, 0);
     }
@@ -201,7 +202,7 @@ public class MembreFrame extends JFrame implements ViewMembre {
         table.setRowHeight(30);
         table.setFont(new Font("Segoe UI", Font.PLAIN, 13));
         table.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 13));
-        table.getTableHeader().setBackground(new Color(236, 240, 241));
+        table.getTableHeader().setBackground(new Color(20, 200, 241));
         table.setGridColor(new Color(220, 220, 220));
         table.setShowGrid(true);
     }

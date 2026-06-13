@@ -1,5 +1,6 @@
 package Library.view;
 import Library.controller.ControllerAdmin;
+import Library.model.dao.DAODocument;
 import Library.model.entity.Document;
 import Library.model.entity.Livre;
 import Library.model.entity.DVD;
@@ -14,6 +15,8 @@ public interface ViewAdmin {
     void showError(String message);
     void setController(ControllerAdmin c);
     void fermer();
+
+    void setDAODocument(DAODocument dao);
 
     Document getSelectedDocument();
 

@@ -10,6 +10,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import Library.view.GUI.LoginFrame;
+import Library.view.GUI.MembreFrame;
 
 public class ControllerMembre implements ActionListener {
 
@@ -32,13 +33,11 @@ public class ControllerMembre implements ActionListener {
         ((JFrame) view).setVisible(true);
     }
 
-    /** Met à jour les deux tableaux dans la vue. */
+
     private void rafraichir() {
         view.afficherNomMembre(membre.toString());
-        view.afficherNbEmprunts(
-                membre.getNbEmpruntsActuels(), Membre.MAX_EMPRUNTS);
+        view.afficherNbEmprunts(membre.getNbEmpruntsActuels(), Membre.MAX_EMPRUNTS);
 
-        // Documents disponibles = tous les documents non empruntés
         Document[] disponibles = daoDocument.getList().stream()
                 .filter(Document::estDisponible)
                 .toArray(Document[]::new);
@@ -52,10 +51,14 @@ public class ControllerMembre implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String cmd = e.getActionCommand();
 
-        if ("EMPRUNTER".equals(cmd)) {
-            int docId = view instanceof Library.view.GUI.MembreFrame mf
-                    ? mf.getSelectedDocumentDisponibleId()
-                    : -1;
+        if ("EMPRUNTER".equals(cmd))
+        {
+            int docId;
+            if (view instanceof MembreFrame mf) {
+                docId = mf.getSelectedDocumentDisponibleId();
+            } else {
+                docId = -1;
+            }
 
             if (docId == -1) {
                 view.showError("Sélectionnez un document disponible.");
@@ -73,8 +76,8 @@ public class ControllerMembre implements ActionListener {
 
             boolean ok = membre.emprunter(doc);
             if (ok) {
-                daoDocument.update(doc);   // persister le changement de dispo
-                daoMembre.update(membre);  // persister l'état du membre
+                daoDocument.update(doc);
+                daoMembre.update(membre);
                 view.showMessage("« " + doc.getTitre() + " » emprunté !");
             } else {
                 view.showError("Ce document n'est plus disponible.");
@@ -83,7 +86,7 @@ public class ControllerMembre implements ActionListener {
         }
 
         if ("RETOURNER".equals(cmd)) {
-            int docId = view instanceof Library.view.GUI.MembreFrame mf
+            int docId = view instanceof MembreFrame mf
                     ? mf.getSelectedDocumentEmprunteId()
                     : -1;
 

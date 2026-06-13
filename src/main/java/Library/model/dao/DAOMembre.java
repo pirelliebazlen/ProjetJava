@@ -76,8 +76,7 @@ public class DAOMembre implements DataAccessLayer<Membre> {
 
     @SuppressWarnings("unchecked")
     private void readData() {
-        try (ObjectInputStream ois =
-                     new ObjectInputStream(new FileInputStream(fichier))) {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fichier))){
             idCourant = ois.readInt();
             membres = (ArrayList<Membre>) ois.readObject();
         } catch (Exception e) {

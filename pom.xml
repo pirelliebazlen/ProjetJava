@@ -26,6 +26,11 @@
             <version>5.10.2</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.formdev</groupId>
+            <artifactId>flatlaf</artifactId>
+            <version>3.5.4</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -59,7 +64,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>Library.Main</mainClass> <!-- Remplacez par votre classe main -->
+                            <mainClass>Library.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -67,10 +72,15 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.12.1</version> <!-- Version recommandée pour Java 21 -->
+                <version>3.12.1</version>
                 <configuration>
-                    <release>21</release> <!-- Alternative à source/target (recommandé pour Java 9+) -->
+                    <release>21</release>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.6.3</version>
             </plugin>
         </plugins>
     </build>

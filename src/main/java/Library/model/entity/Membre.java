@@ -4,8 +4,6 @@ import java.time.LocalDate;
 import java.io.Serializable;
 public class Membre implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-
     public static final int MAX_EMPRUNTS = 5;
 
     private int id;
@@ -14,9 +12,18 @@ public class Membre implements Serializable {
     private String prenom;
     private LocalDate dateInscription;
 
-    // Tableau de taille fixe MAX_EMPRUNTS (null = slot vide)
+
     private final Document[] documentsEmpruntes;
 
+    /**
+     * Crée un nouveau membre.
+     *
+     * @param id identifiant du membre
+     * @param login login du membre
+     * @param nom nom du membre
+     * @param prenom prénom du membre
+     * @param dateInscription date d'inscription
+     */
     public Membre(int id, String login, String nom,
                   String prenom, LocalDate dateInscription) {
         this.id = id;
@@ -27,6 +34,12 @@ public class Membre implements Serializable {
         this.documentsEmpruntes = new Document[MAX_EMPRUNTS];
     }
 
+    /**
+     * Emprunte un document si disponible et si le membre n'a pas atteint sa limite.
+     *
+     * @param doc document à emprunter
+     * @return true si l'emprunt a réussi
+     */
     public boolean emprunter(Document doc) {
         if (!doc.estDisponible()) return false;
 
@@ -40,10 +53,17 @@ public class Membre implements Serializable {
         return false;   // tableau plein
     }
 
+    /**
+     * Retourne un document précédemment emprunté.
+     *
+     * @param doc document à retourner
+     * @return true si le retour a réussi
+     */
+
     public boolean retourner(Document doc) {
         for (int i = 0; i < MAX_EMPRUNTS; i++) {
-            if (documentsEmpruntes[i] != null
-                    && documentsEmpruntes[i].equals(doc)) {
+            if (documentsEmpruntes[i] != null && documentsEmpruntes[i].equals(doc))
+            {
                 documentsEmpruntes[i] = null;
                 doc.retourner();
                 return true;
@@ -58,7 +78,7 @@ public class Membre implements Serializable {
             if (d != null) count++;
         return count;
     }
-
+    /** @return true si le membre a atteint sa limite d'emprunts */
     public boolean tableauPlein() {
         return getNbEmpruntsActuels() >= MAX_EMPRUNTS;
     }
