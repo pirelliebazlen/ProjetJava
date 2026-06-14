@@ -4,8 +4,6 @@ import java.time.LocalDate;
 
 public class Livre extends Document {
 
-    private static final long serialVersionUID = 1L;
-
     private String auteur;
     private int nbPages;
 

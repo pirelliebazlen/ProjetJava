@@ -7,8 +7,6 @@ import java.time.LocalDate;
 
 public abstract class Document implements Serializable, Empruntable {
 
-    private static final long serialVersionUID = 1L;
-
     private int id;
     private String titre;
     private int annee;
@@ -23,20 +21,33 @@ public abstract class Document implements Serializable, Empruntable {
         this.disponible = true;
     }
 
-    @Override public void emprunter()        { this.disponible = false; }
-    @Override public void retourner()        { this.disponible = true; }
-    @Override public boolean estDisponible() { return disponible; }
+    @Override public void emprunter()
+    { this.disponible = false; }
+    @Override public void retourner()
+    { this.disponible = true; }
+    @Override public boolean estDisponible()
+    { return disponible; }
 
-    public int getId()                          { return id; }
-    public void setId(int id)                   { this.id = id; }
-    public String getTitre()                    { return titre; }
-    public void setTitre(String titre)          { this.titre = titre; }
-    public int getAnnee()                       { return annee; }
-    public void setAnnee(int annee)             { this.annee = annee; }
-    public LocalDate getDatePublication()       { return datePublication; }
-    public void setDatePublication(LocalDate d) { this.datePublication = d; }
-    public String getImagePath()                { return imagePath; }
-    public void setImagePath(String imagePath)  { this.imagePath = imagePath; }
+    public int getId()
+    { return id; }
+    public void setId(int id)
+    { this.id = id; }
+    public String getTitre()
+    { return titre; }
+    public void setTitre(String titre)
+    { this.titre = titre; }
+    public int getAnnee()
+    { return annee; }
+    public void setAnnee(int annee)
+    { this.annee = annee; }
+    public LocalDate getDatePublication()
+    { return datePublication; }
+    public void setDatePublication(LocalDate d)
+    { this.datePublication = d; }
+    public String getImagePath()
+    { return imagePath; }
+    public void setImagePath(String imagePath)
+    { this.imagePath = imagePath; }
 
     public abstract String getType();
 

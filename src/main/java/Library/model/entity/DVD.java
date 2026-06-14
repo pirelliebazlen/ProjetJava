@@ -4,8 +4,6 @@ import java.time.LocalDate;
 
 public class DVD extends Document {
 
-    private static final long serialVersionUID = 1L;
-
     private int dureeMinutes;
 
     public DVD(String titre, int annee, LocalDate datePublication, int dureeMinutes) {

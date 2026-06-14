@@ -59,11 +59,15 @@ public class ControllerAdmin implements ActionListener {
                     JOptionPane.QUESTION_MESSAGE, null, types, types[0]);
             if (choix == null) return;
 
-            Document nouveau = switch (choix) {
-                case "Livre"   -> view.promptNouveauLivre();
-                case "DVD"     -> view.promptNouveauDVD();
-                default        -> view.promptNouveauMagazine();
-            };
+            Document nouveau = null;
+
+            if (choix.equals("Livre")) {
+                nouveau = view.promptNouveauLivre();
+            } else if (choix.equals("DVD")) {
+                nouveau = view.promptNouveauDVD();
+            } else {
+                nouveau = view.promptNouveauMagazine();
+            }
 
             if (nouveau != null) {
                 daoDocument.add(nouveau);
@@ -79,12 +83,15 @@ public class ControllerAdmin implements ActionListener {
                 return;
             }
 
-            Document modifie = switch (selectionne) {
-                case Livre l       -> view.promptModifierLivre(l);
-                case DVD d         -> view.promptModifierDVD(d);
-                case Magazine m    -> view.promptModifierMagazine(m);
-                default            -> null;
-            };
+            Document modifie = null;
+
+            if (selectionne instanceof Livre l) {
+                modifie = view.promptModifierLivre(l);
+            } else if (selectionne instanceof DVD d) {
+                modifie = view.promptModifierDVD(d);
+            } else if (selectionne instanceof Magazine m) {
+                modifie = view.promptModifierMagazine(m);
+            }
 
             if (modifie != null) {
                 daoDocument.update(modifie);
