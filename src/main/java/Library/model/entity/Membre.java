@@ -12,7 +12,6 @@ public class Membre implements Serializable {
     private String prenom;
     private LocalDate dateInscription;
 
-
     private final Document[] documentsEmpruntes;
 
     /**
@@ -114,5 +113,6 @@ public class Membre implements Serializable {
     }
 
     @Override
-    public int hashCode() { return Integer.hashCode(id); }
+    public int hashCode()
+    { return Integer.hashCode(id); }
 }
