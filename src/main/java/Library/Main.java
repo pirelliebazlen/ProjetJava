@@ -13,14 +13,14 @@ import com.formdev.flatlaf.themes.FlatMacLightLaf;
 /**
  * Point d'entrée de l'application de gestion de bibliothèque.
  * <p>
- * Cette classe initialise le Look and Feel graphique de l'application
- * (via la librairie externe FlatLaf) et lance la fenêtre de connexion
- * ainsi que son contrôleur associé.
+ *
+ *
+ *
  */
 
 public class Main {
     public static void main(String[] args) {
-        try {
+      /*  try {
            //UIManager.setLookAndFeel(new FlatDarkLaf());
             UIManager.setLookAndFeel(new FlatMacLightLaf());
         } catch (UnsupportedLookAndFeelException e) {
@@ -29,6 +29,21 @@ public class Main {
 
         LoginFrame loginFrame = new LoginFrame();
         LoginController controller = new LoginController(loginFrame);
-        controller.run();
+        controller.run();*/
+
+
+        // Applique le thème FlatLaf AVANT la création de toute fenêtre
+        try {
+            UIManager.setLookAndFeel(new FlatMacLightLaf());
+        } catch (UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
+
+        // Lance l'interface sur l'EDT (bonne pratique Swing obligatoire)
+        SwingUtilities.invokeLater(() -> {
+            LoginFrame loginFrame = new LoginFrame();
+            LoginController controller = new LoginController(loginFrame);
+            controller.run();
+        });
     }
 }

@@ -55,7 +55,7 @@ public class ControllerMembre implements ActionListener {
         {
             int docId;
             if (view instanceof MembreFrame mf) {
-                docId = mf.getSelectedDocumentDisponibleId();
+                docId = mf.getSelectedDocumentDisponibleId(); //je recupere l'id du document
             } else {
                 docId = -1;
             }
@@ -65,7 +65,7 @@ public class ControllerMembre implements ActionListener {
                 return;
             }
 
-            if (membre.tableauPlein()) {
+            if (membre.tableauPlein()) { //je verifie que le tableau de emprunt ne pas plein
                 view.showError("Vous avez atteint la limite de "
                         + Membre.MAX_EMPRUNTS + " emprunts.");
                 return;
